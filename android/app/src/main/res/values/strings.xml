@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ElectroStat Config</string>
+    <string name="title_activity_main">ElectroStat Config</string>
+    <string name="package_name">com.electrostat.cfg</string>
+    <string name="custom_url_scheme">com.electrostat.cfg</string>
+</resources>

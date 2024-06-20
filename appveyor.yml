@@ -1,0 +1,33 @@
+image: Ubuntu2004
+
+platform:
+  - x64
+
+cache:
+  - node_modules
+
+init:
+  - git config --global core.autocrlf input
+
+install:
+  - yarn
+
+build_script:
+  - yarn build
+  - yarn build:android
+
+artifacts:
+  - path: android\app\build\outputs\apk\debug\app-debug.apk
+    name: electrostat-cfg-debug.apk
+
+deploy:
+- provider: GitHub
+  description: Draft release
+  auth_token:
+    secure: bX4+yRG5TU2wiUBW4BFbiuK+wzH0IBfNZFVuXVA0jTDdENvU7GUC00LRECTfLmAt
+  draft: true
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true
+
+test: false

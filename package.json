@@ -1,0 +1,46 @@
+{
+  "name": "electro-stat-app",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && npx cap sync",
+    "preview": "vite preview",
+    "open:android": "npx cap open android",
+    "open:ios": "npx cap open ios",
+    "run:android": "tsc && vite build && npx cap run android",
+    "run:ios": "tsc && vite build && npx cap run ios",
+    "install:android": "adb install android/app/build/outputs/apk/debug/app-debug.apk",
+    "build:android": "cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@awesome-cordova-plugins/core": "^6.7.0",
+    "@awesome-cordova-plugins/wifi-wizard-2": "^6.7.0",
+    "@capacitor/android": "^5.7.0",
+    "@capacitor/app": "^5.0.7",
+    "@capacitor/core": "^5.7.0",
+    "@capacitor/ios": "^5.7.0",
+    "@capacitor/network": "^5.0.8",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.20",
+    "@mui/lab": "^5.0.0-alpha.170",
+    "@mui/material": "^5.15.20",
+    "capacitor-esptouch": "Glebka/capacitor-esptouch",
+    "cordova-plugin-network-information": "^3.0.0",
+    "cordova-plugin-wifiwizard2": "^3.1.1",
+    "es6-promise-plugin": "^4.2.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^5.7.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1"
+  }
+}
