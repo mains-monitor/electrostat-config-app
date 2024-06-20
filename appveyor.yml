@@ -29,7 +29,7 @@ deploy:
 - provider: GitHub
   description: Draft release
   auth_token:
-    secure: bX4+yRG5TU2wiUBW4BFbiuK+wzH0IBfNZFVuXVA0jTDdENvU7GUC00LRECTfLmAt
+    secure: F9LLS3TkKo/pFmBa0e7yTe4j75rcAcQqNHW7eQZQWSiREi9fl41XxSSrnjLoVR5UDhuiqVDV5U6fQ+36S9EC/uRZj7UHtFso6HGo5nqmdXZBhFUjMg0IQ4skcrRqGUgq
   draft: true
   on:
     branch: master
