@@ -9,7 +9,12 @@ cache:
 init:
   - git config --global core.autocrlf input
 
+environment:
+  nodejs_version: v20.12.2
+
 install:
+  - nvm install $nodejs_version
+  - nvm use $nodejs_version
   - yarn
 
 build_script:
