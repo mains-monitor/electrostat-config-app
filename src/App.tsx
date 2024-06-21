@@ -1,4 +1,5 @@
-import { Settings, WifiPassword } from "@mui/icons-material";
+import "./App.css";
+import { QrCodeScanner, Settings, WifiPassword } from "@mui/icons-material";
 import {
   Container,
   createTheme,
@@ -8,7 +9,9 @@ import {
   Avatar,
   Typography,
   TextField,
+  Stack,
 } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -18,8 +21,32 @@ import { WifiWizard2 } from "@awesome-cordova-plugins/wifi-wizard-2";
 import { Esptouch } from "capacitor-esptouch";
 import { App as CapApp, URLOpenListenerEvent } from "@capacitor/app";
 import { Network } from "@capacitor/network";
+import {
+  BarcodeScanner,
+  Barcode,
+} from '@capacitor-mlkit/barcode-scanning';
 
 const defaultTheme = createTheme();
+
+const scanSingleBarcode = async (): Promise<Barcode> => {
+  return new Promise(async resolve => {
+    document.querySelector('body')?.classList.add('barcode-scanner-active');
+
+    const listener = await BarcodeScanner.addListener(
+      'barcodeScanned',
+      async result => {
+        await listener.remove();
+        document
+          .querySelector('body')
+          ?.classList.remove('barcode-scanner-active');
+        await BarcodeScanner.stopScan();
+        resolve(result.barcode);
+      },
+    );
+
+    await BarcodeScanner.startScan();
+  });
+};
 
 function App() {
   const [configuring, setConfiguring] = useState(false);
@@ -118,6 +145,20 @@ function App() {
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        <Stack direction="row" spacing={2} sx={{ justifyContent: "right", marginTop: (theme) => theme.spacing(2) }}>
+          <IconButton onClick={async () => {
+            const result = await scanSingleBarcode();
+            if (result) {
+              const deepLink = new URL(result.rawValue);
+              const key = deepLink.searchParams.get("key");
+              if (key) {
+                setSecurityKey(key);
+              }
+            }
+          }}>
+            <QrCodeScanner />
+          </IconButton>
+        </Stack>
         <Box
           sx={{
             marginTop: 8,
